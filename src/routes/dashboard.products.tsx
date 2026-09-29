@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router"; import { ProductsPage } from "@/components/dashboard-pages";
+export const Route=createFileRoute("/dashboard/products")({head:()=>({meta:[{title:"Products — Shoplytic"},{name:"description",content:"Compare best sellers, low performers, and product categories."},{property:"og:title",content:"Products — Shoplytic"},{property:"og:description",content:"Understand product performance."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:ProductsPage});

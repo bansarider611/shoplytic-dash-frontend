@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router"; import { SalesPage } from "@/components/dashboard-pages";
+export const Route=createFileRoute("/dashboard/sales")({head:()=>({meta:[{title:"Sales — Shoplytic"},{name:"description",content:"Explore sales, profit, category, and regional performance."},{property:"og:title",content:"Sales — Shoplytic"},{property:"og:description",content:"Explore sales and profit performance."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:SalesPage});
