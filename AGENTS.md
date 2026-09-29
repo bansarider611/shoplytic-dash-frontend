@@ -8,3 +8,8 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Project architecture
+
+- Keep all frontend analytics fixtures in a typed shared data module so a future FastAPI client can replace them without changing view composition.
+- Use a single dashboard shell for all analytics routes to keep navigation and responsive behavior consistent.
