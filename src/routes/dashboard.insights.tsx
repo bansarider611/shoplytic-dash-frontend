@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router"; import { InsightsPage } from "@/components/dashboard-pages";
+export const Route=createFileRoute("/dashboard/insights")({head:()=>({meta:[{title:"Insights — Shoplytic"},{name:"description",content:"Discover clear business recommendations from your sales data."},{property:"og:title",content:"Insights — Shoplytic"},{property:"og:description",content:"Discover business recommendations in your data."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:InsightsPage});

@@ -1,24 +1,37 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { ArrowRight, BarChart3, Boxes, Lightbulb, Sparkles, TrendingUp, Users } from "lucide-react";
+import { SalesAreaChart } from "@/components/charts";
+import { ShoplyticLogo } from "@/components/shoplytic-logo";
+import { Button } from "@/components/ui/button";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({ meta: [
+    { title: "Shoplytic — Your Business, Explained" },
+    { name: "description", content: "Upload your sales CSV and instantly uncover clear sales, product, and customer insights." },
+    { property: "og:title", content: "Shoplytic — Your Business, Explained" },
+    { property: "og:description", content: "Simple, beautiful retail analytics for growing businesses." },
+    { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
+  ]}), component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+const features = [
+  { icon: TrendingUp, title: "Sales Overview", text: "See revenue, profit, orders, and momentum at a glance.", tone: "bg-lavender-soft" },
+  { icon: Boxes, title: "Product Performance", text: "Know what is winning, slowing down, or worth restocking.", tone: "bg-peach-soft" },
+  { icon: Users, title: "Customer Insights", text: "Understand your best buyers and what brings them back.", tone: "bg-mint-soft" },
+  { icon: Lightbulb, title: "Smart Recommendations", text: "Turn patterns in your data into practical next steps.", tone: "bg-yellow-soft" },
+];
+
+function HomePage() {
+  return <div className="min-h-screen overflow-hidden bg-background">
+    <header className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8"><ShoplyticLogo/><nav className="hidden items-center gap-8 md:flex"><a href="#how" className="text-sm font-medium text-muted-foreground hover:text-foreground">How it works</a><a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground">Features</a><span className="text-sm font-medium text-muted-foreground" title="Authentication coming soon">Sign in</span></nav><Button asChild size="sm"><Link to="/upload">Upload Your Data <ArrowRight className="size-4"/></Link></Button></header>
+    <main>
+      <section className="mx-auto grid min-h-[670px] max-w-7xl items-center gap-16 px-5 pb-20 pt-10 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:py-20">
+        <div><div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-lavender-soft px-4 py-2 text-xs font-semibold"><Sparkles className="size-3.5"/>Simple analytics for your business ✦</div><h1 className="mt-7 max-w-2xl text-5xl font-extrabold leading-[1.06] sm:text-6xl lg:text-7xl">Your Business,<br/><span className="text-primary">Explained.</span></h1><p className="mt-6 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">Upload your sales CSV and instantly understand what’s selling, who your customers are, and where your business can grow.</p><div className="mt-8 flex flex-wrap gap-3"><Button asChild size="lg"><Link to="/upload">Upload Your Data <ArrowRight className="size-4"/></Link></Button><Button asChild variant="outline" size="lg"><a href="#how">See How It Works</a></Button></div><p className="mt-5 text-xs text-muted-foreground">No setup. No spreadsheets to wrestle with.</p></div>
+        <div className="relative mx-auto w-full max-w-[620px]"><div className="absolute -left-5 top-16 h-24 w-24 rounded-2xl bg-pink-soft"/><div className="absolute -right-6 bottom-20 h-28 w-28 rounded-full bg-mint-soft"/><div className="relative rotate-[1deg] rounded-3xl border border-border bg-card p-4 shadow-[0_30px_80px_oklch(0.4_0.05_290/0.14)] sm:p-6"><div className="flex items-center justify-between"><div><p className="text-xs text-muted-foreground">Store overview</p><h2 className="mt-1 font-bold">Your business at a glance</h2></div><span className="rounded-full bg-mint-soft px-3 py-1 text-xs font-semibold">Last 12 months</span></div><div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">{[["Sales","$184k","bg-lavender-soft"],["Orders","3,842","bg-blue-soft"],["Profit","$62k","bg-mint-soft"],["AOV","$47.96","bg-peach-soft"]].map(([l,v,c]) => <div className={`rounded-xl ${c} p-3`} key={l}><span className="text-[10px] text-muted-foreground">{l}</span><strong className="mt-2 block text-lg">{v}</strong></div>)}</div><div className="mt-4 rounded-2xl border border-border bg-background p-4"><div className="flex justify-between"><b className="text-sm">Sales trend</b><span className="text-xs font-semibold text-success">+12.8%</span></div><SalesAreaChart compact/></div><div className="mt-4 grid gap-3 sm:grid-cols-3"><div className="rounded-xl bg-yellow-soft p-3 sm:col-span-2"><p className="text-xs font-semibold">Friday is your strongest day</p><p className="mt-1 text-[10px] text-muted-foreground">Sales peak just before the weekend.</p></div><div className="rounded-xl bg-pink-soft p-3"><p className="text-xs text-muted-foreground">Returning</p><strong className="mt-1 block text-lg">42%</strong></div></div></div></div>
+      </section>
+      <section id="features" className="border-y border-border bg-card py-24"><div className="mx-auto max-w-7xl px-5 lg:px-8"><p className="text-sm font-bold text-primary">Clear answers, not more charts</p><h2 className="mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">What can Shoplytic tell you?</h2><div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">{features.map((f) => <article key={f.title} className="rounded-2xl border border-border bg-background p-6 shadow-card"><span className={`grid size-11 place-items-center rounded-xl ${f.tone}`}><f.icon className="size-5"/></span><h3 className="mt-5 font-bold">{f.title}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{f.text}</p></article>)}</div></div></section>
+      <section id="how" className="mx-auto max-w-7xl px-5 py-24 lg:px-8"><div className="text-center"><p className="text-sm font-bold text-primary">From file to clarity</p><h2 className="mt-3 text-3xl font-bold sm:text-4xl">Three simple steps</h2></div><div className="mt-14 grid gap-10 md:grid-cols-3">{[["01","Upload your CSV","Bring the sales file you already use."],["02","Shoplytic understands your data","Columns and quality are checked automatically."],["03","Get clear business insights","Explore focused answers and practical recommendations."]].map(([n,t,d],i) => <div className="relative text-center" key={n}><span className={`mx-auto grid size-14 place-items-center rounded-2xl text-sm font-bold ${["bg-peach-soft","bg-lavender-soft","bg-mint-soft"][i]}`}>{n}</span><h3 className="mt-5 font-bold">{t}</h3><p className="mx-auto mt-2 max-w-xs text-sm leading-6 text-muted-foreground">{d}</p></div>)}</div></section>
+      <section className="mx-auto max-w-7xl px-5 pb-24 lg:px-8"><div className="flex flex-col items-center justify-between gap-6 rounded-3xl border border-primary/20 bg-lavender-soft px-7 py-12 text-center sm:px-12 md:flex-row md:text-left"><div><p className="text-sm font-semibold text-primary">Your next insight is one file away.</p><h2 className="mt-2 text-3xl font-bold">Ready to understand your business?</h2></div><Button asChild size="lg"><Link to="/upload">Upload your data <ArrowRight className="size-4"/></Link></Button></div></section>
+    </main><footer className="border-t border-border py-8"><div className="mx-auto flex max-w-7xl items-center justify-between px-5 text-xs text-muted-foreground lg:px-8"><ShoplyticLogo/><span>Analytics made human.</span></div></footer>
+  </div>;
 }
